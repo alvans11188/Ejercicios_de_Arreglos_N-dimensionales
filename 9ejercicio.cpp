@@ -12,33 +12,33 @@ latino de orden 4.
 #include <iostream>
 using namespace std;
 
-void generarCuadradoLatino(int N) {
-    int matriz[N][N];
+void CuadradoLatino(int orden) {
+    int cuadrado[4][4];
 
-    // Generar el cuadrado latino
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            matriz[i][j] = (i + j) % N + 1;
-        }
+    for (int j = 0; j < 4; ++j) {
+        cuadrado[0][j] = j + 1;
     }
 
-    // Imprimir el cuadrado latino
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            cout << matriz[i][j] << " ";
+    for (int i = 1; i < 4; ++i) {
+        int most = cuadrado[i-1][4-1];
+        for (int j = 4-1; j > 0; --j) {
+            cuadrado[i][j] = cuadrado[i-1][j-1];
+        }
+        cuadrado[i][0] = most;
+    }
+
+    cout << "Cuadrado Latino de orden " << orden << ":" << endl;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            cout << cuadrado[i][j] << " ";
         }
         cout << endl;
     }
 }
 
 int main() {
-    int N;
-    cout << "Ingrese el orden del cuadrado latino: ";
-    cin >> N;
-
-    generarCuadradoLatino(N);
-
+    int orden = 4;
+    CuadradoLatino(orden);
     return 0;
 }
-
 
